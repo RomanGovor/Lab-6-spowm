@@ -11,16 +11,16 @@ int index;
 int memorySize;
 void* indexAmount[64];
 
-char Array_total_memory[All_memory];                          // Общий массив памяти
+char Array_total_memory[All_memory];                          // РћР±С‰РёР№ РјР°СЃСЃРёРІ РїР°РјСЏС‚Рё
 char* Block_buffer[BUFSIZ];
 char* activeBuffer[BUFSIZ];
 
 unsigned int LastBlockBuffer;
 unsigned int Buffer_counter_of_blocks = 1;
-unsigned int Active_blocks_amount = 0;                        // Число активных блоков
+unsigned int Active_blocks_amount = 0;                        // Р§РёСЃР»Рѕ Р°РєС‚РёРІРЅС‹С… Р±Р»РѕРєРѕРІ
 unsigned int Size_of_block[BUFSIZ];
 unsigned int blockBufferSize[BUFSIZ];
-unsigned long Available_memory = All_memory;                  // Доступная память 
+unsigned long Available_memory = All_memory;                  // Р”РѕСЃС‚СѓРїРЅР°СЏ РїР°РјСЏС‚СЊ 
 
 int getInt(int limit);
 void Menu();
@@ -45,31 +45,31 @@ int main()
         case '1':
         {
             system("cls");  
-            cout << "Введите индекс в диапазоне [1..64]: ";
-            int index  = getInt(64);                       // Индекс блока для выделения памяти
+            cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ РІ РґРёР°РїР°Р·РѕРЅРµ [1..64]: ";
+            int index  = getInt(64);                       // РРЅРґРµРєСЃ Р±Р»РѕРєР° РґР»СЏ РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё
 
-            if (indexAmount[index] == NULL)                 // Если блок не занят
+            if (indexAmount[index] == NULL)                 // Р•СЃР»Рё Р±Р»РѕРє РЅРµ Р·Р°РЅСЏС‚
             {
-                cout << "Введите размер выделяемой памяти: ";
-                int memorySize = getInt(All_memory);       // Размер выделяемой памяти
+                cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РІС‹РґРµР»СЏРµРјРѕР№ РїР°РјСЏС‚Рё: ";
+                int memorySize = getInt(All_memory);       // Р Р°Р·РјРµСЂ РІС‹РґРµР»СЏРµРјРѕР№ РїР°РјСЏС‚Рё
 
                 indexAmount[index] = _malloc(memorySize);
                 if (indexAmount[index] == NULL)
                 {
-                    cout << endl << "Ошибка: недостаточно памяти" << endl;
+                    cout << endl << "РћС€РёР±РєР°: РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїР°РјСЏС‚Рё" << endl;
                     rewind(stdin);
                 }
                 else
                 {
                     cout << "-----------------------------------" << endl;
-                    cout << "Индекс: " << index << endl;
-                    cout << "Занятых блоков: " << Active_blocks_amount << endl;
-                    cout << "Выделено памяти: " << memorySize << endl;
+                    cout << "РРЅРґРµРєСЃ: " << index << endl;
+                    cout << "Р—Р°РЅСЏС‚С‹С… Р±Р»РѕРєРѕРІ: " << Active_blocks_amount << endl;
+                    cout << "Р’С‹РґРµР»РµРЅРѕ РїР°РјСЏС‚Рё: " << memorySize << endl;
                 }
             }
             else
             {
-                cout << "Ошибка: данный блок уже используется" << endl;
+                cout << "РћС€РёР±РєР°: РґР°РЅРЅС‹Р№ Р±Р»РѕРє СѓР¶Рµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ" << endl;
                 system("pause");
                 break;
             }
@@ -78,37 +78,37 @@ int main()
         case '2':
         {
             system("cls");
-            cout << "Введите индекс в диапазоне [1..64]: ";
-            int index = getInt(64);                       // Индекс блока для освобождения памяти
+            cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ РІ РґРёР°РїР°Р·РѕРЅРµ [1..64]: ";
+            int index = getInt(64);                       // РРЅРґРµРєСЃ Р±Р»РѕРєР° РґР»СЏ РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ РїР°РјСЏС‚Рё
            
-            if (_free(indexAmount[index]) == -1)           // Если блок не найден
+            if (_free(indexAmount[index]) == -1)           // Р•СЃР»Рё Р±Р»РѕРє РЅРµ РЅР°Р№РґРµРЅ
             {
-                cout << endl <<"Ошибка: блок не найден" << endl;
-                cout << "Занятых блоков: " << Active_blocks_amount << endl;
+                cout << endl <<"РћС€РёР±РєР°: Р±Р»РѕРє РЅРµ РЅР°Р№РґРµРЅ" << endl;
+                cout << "Р—Р°РЅСЏС‚С‹С… Р±Р»РѕРєРѕРІ: " << Active_blocks_amount << endl;
                 break;
             }
-            cout << "Память освобождена" << endl;
-            cout << "Занятых блоков: " << Active_blocks_amount << endl;
+            cout << "РџР°РјСЏС‚СЊ РѕСЃРІРѕР±РѕР¶РґРµРЅР°" << endl;
+            cout << "Р—Р°РЅСЏС‚С‹С… Р±Р»РѕРєРѕРІ: " << Active_blocks_amount << endl;
             break;
         }
         case '3':
         {
             system("cls");
-            cout << "Введите индекс в диапазоне [1..64]: ";
-            int index = getInt(64);                       // Индекс блока для освобождения памяти
+            cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ РІ РґРёР°РїР°Р·РѕРЅРµ [1..64]: ";
+            int index = getInt(64);                       // РРЅРґРµРєСЃ Р±Р»РѕРєР° РґР»СЏ РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ РїР°РјСЏС‚Рё
 
             if (indexAmount[index] == NULL)
             {
-                cout << "Ошибка: блок не найден" << endl;
+                cout << "РћС€РёР±РєР°: Р±Р»РѕРє РЅРµ РЅР°Р№РґРµРЅ" << endl;
                 break;
             }
 
-            cout << "Введите размер выделяемой памяти: ";
-            int memorySize = getInt(All_memory);       // Размер выделяемой памяти
+            cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РІС‹РґРµР»СЏРµРјРѕР№ РїР°РјСЏС‚Рё: ";
+            int memorySize = getInt(All_memory);       // Р Р°Р·РјРµСЂ РІС‹РґРµР»СЏРµРјРѕР№ РїР°РјСЏС‚Рё
 
-            indexAmount[index] = _realloc(indexAmount[index], memorySize); // Перевыделение памяти 
-            cout << "Занятых блоков: " << Active_blocks_amount << endl;
-            cout << "Память переопределена" << endl;
+            indexAmount[index] = _realloc(indexAmount[index], memorySize); // РџРµСЂРµРІС‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё 
+            cout << "Р—Р°РЅСЏС‚С‹С… Р±Р»РѕРєРѕРІ: " << Active_blocks_amount << endl;
+            cout << "РџР°РјСЏС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅР°" << endl;
             break;
         }
         case '4':
@@ -129,91 +129,91 @@ int main()
     }
 }
 
-int getInt(int limit)                                      // Проверка на введенное значние
+int getInt(int limit)                                      // РџСЂРѕРІРµСЂРєР° РЅР° РІРІРµРґРµРЅРЅРѕРµ Р·РЅР°С‡РЅРёРµ
 {
     int q;
     while (!(cin >> q) || q < 1 || q >limit ){
         rewind(stdin); 
-        cout << "Некорректное значение. Повторно введите значения " << endl;      
+        cout << "РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ. РџРѕРІС‚РѕСЂРЅРѕ РІРІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёСЏ " << endl;      
     } 
     return q;
 }
 
-void Menu()                                                // Основное меню
+void Menu()                                                // РћСЃРЅРѕРІРЅРѕРµ РјРµРЅСЋ
 {
     cout << "-----------------------------------" << endl;
-    cout << "Выберите команду:" << endl << endl;
-    cout << "1. Выделить память (malloc)" << endl;
-    cout << "2. Освободить память (free)" << endl;
-    cout << "3. Переопределить память (realloc)" << endl;
-    cout << "4. Показать информацию о памяти" << endl;
-    cout << "5. Выход из программы" << endl;
+    cout << "Р’С‹Р±РµСЂРёС‚Рµ РєРѕРјР°РЅРґСѓ:" << endl << endl;
+    cout << "1. Р’С‹РґРµР»РёС‚СЊ РїР°РјСЏС‚СЊ (malloc)" << endl;
+    cout << "2. РћСЃРІРѕР±РѕРґРёС‚СЊ РїР°РјСЏС‚СЊ (free)" << endl;
+    cout << "3. РџРµСЂРµРѕРїСЂРµРґРµР»РёС‚СЊ РїР°РјСЏС‚СЊ (realloc)" << endl;
+    cout << "4. РџРѕРєР°Р·Р°С‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РїР°РјСЏС‚Рё" << endl;
+    cout << "5. Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹" << endl;
     cout << "-----------------------------------" << endl;
 }
 
-void ShowInformation()                                     // Информация о занятых блоках
+void ShowInformation()                                     // РРЅС„РѕСЂРјР°С†РёСЏ Рѕ Р·Р°РЅСЏС‚С‹С… Р±Р»РѕРєР°С…
 {
     system("cls");
-    cout << "Информация о памяти" << endl;
+    cout << "РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РїР°РјСЏС‚Рё" << endl;
     cout << "-----------------------------------" << endl;
-    cout << "Объем свободной памяти:" << endl;
+    cout << "РћР±СЉРµРј СЃРІРѕР±РѕРґРЅРѕР№ РїР°РјСЏС‚Рё:" << endl;
     cout << Available_memory << endl;
-    cout << "Количество занятых блоков:" << endl;
+    cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РЅСЏС‚С‹С… Р±Р»РѕРєРѕРІ:" << endl;
     cout << Active_blocks_amount << endl;
 }
 
-void Initialization()                                       // Начальные значения данных
+void Initialization()                                       // РќР°С‡Р°Р»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РґР°РЅРЅС‹С…
 {
     Block_buffer[0] = Array_total_memory;
-    blockBufferSize[0] = Available_memory;                  // Записывается максимально доступная память
+    blockBufferSize[0] = Available_memory;                  // Р—Р°РїРёСЃС‹РІР°РµС‚СЃСЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕ РґРѕСЃС‚СѓРїРЅР°СЏ РїР°РјСЏС‚СЊ
 }
 
-void* _malloc(unsigned long size)                           // Выделение памяти
+void* _malloc(unsigned long size)                           // Р’С‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё
 {
     char* tempBuffer = NULL;
     unsigned long int endBlock;
 
-    if (size > Available_memory)                            // Если размер выделяемой памяти больше доступного
+    if (size > Available_memory)                            // Р•СЃР»Рё СЂР°Р·РјРµСЂ РІС‹РґРµР»СЏРµРјРѕР№ РїР°РјСЏС‚Рё Р±РѕР»СЊС€Рµ РґРѕСЃС‚СѓРїРЅРѕРіРѕ
     {
-        cout << endl << "Ошибка: превышен размер свободной памяти" << endl;
+        cout << endl << "РћС€РёР±РєР°: РїСЂРµРІС‹С€РµРЅ СЂР°Р·РјРµСЂ СЃРІРѕР±РѕРґРЅРѕР№ РїР°РјСЏС‚Рё" << endl;
         rewind(stdin);
         return tempBuffer;
     }
 
     for (int i = 0; i < Buffer_counter_of_blocks; i++)      
     {
-        if (size <= blockBufferSize[i])                     // Если в блоке памяти выделенная память больше
+        if (size <= blockBufferSize[i])                     // Р•СЃР»Рё РІ Р±Р»РѕРєРµ РїР°РјСЏС‚Рё РІС‹РґРµР»РµРЅРЅР°СЏ РїР°РјСЏС‚СЊ Р±РѕР»СЊС€Рµ
         {
-            tempBuffer = Block_buffer[i];                  // Запись текущего блока памяти
-            endBlock = i;                                 // Запоминание индекса блока
+            tempBuffer = Block_buffer[i];                  // Р—Р°РїРёСЃСЊ С‚РµРєСѓС‰РµРіРѕ Р±Р»РѕРєР° РїР°РјСЏС‚Рё
+            endBlock = i;                                 // Р—Р°РїРѕРјРёРЅР°РЅРёРµ РёРЅРґРµРєСЃР° Р±Р»РѕРєР°
             break;
         }
     }
 
-    if (!tempBuffer)                                       // Если блок памяти пуст
+    if (!tempBuffer)                                       // Р•СЃР»Рё Р±Р»РѕРє РїР°РјСЏС‚Рё РїСѓСЃС‚
         return NULL;
 
-    activeBuffer[Active_blocks_amount] = tempBuffer;      // Запись активной памяти в конец буфера
-    Size_of_block[Active_blocks_amount] = size;             // Запись выделяемой памяти
+    activeBuffer[Active_blocks_amount] = tempBuffer;      // Р—Р°РїРёСЃСЊ Р°РєС‚РёРІРЅРѕР№ РїР°РјСЏС‚Рё РІ РєРѕРЅРµС† Р±СѓС„РµСЂР°
+    Size_of_block[Active_blocks_amount] = size;             // Р—Р°РїРёСЃСЊ РІС‹РґРµР»СЏРµРјРѕР№ РїР°РјСЏС‚Рё
     Active_blocks_amount++;
-    LastBlockBuffer++;                                    // Номер записанного блока
-    Block_buffer[endBlock] = (char*)(endBlock + size + 1);// Запись памяти
+    LastBlockBuffer++;                                    // РќРѕРјРµСЂ Р·Р°РїРёСЃР°РЅРЅРѕРіРѕ Р±Р»РѕРєР°
+    Block_buffer[endBlock] = (char*)(endBlock + size + 1);// Р—Р°РїРёСЃСЊ РїР°РјСЏС‚Рё
     Block_buffer[endBlock] = Block_buffer[endBlock] - size;
-    Available_memory -= size;                                // Пересчет доступной памяти 
+    Available_memory -= size;                                // РџРµСЂРµСЃС‡РµС‚ РґРѕСЃС‚СѓРїРЅРѕР№ РїР°РјСЏС‚Рё 
 
     return tempBuffer;
 }
 
-int _free(void* Deleting_memory)                            // Освобождение памяти
+int _free(void* Deleting_memory)                            // РћСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё
 {
     char* tempBuffer = NULL;
     unsigned int endBlock;
 
-    for (int i = 0; i < LastBlockBuffer; i++)             // Количество записанных блоков
+    for (int i = 0; i < LastBlockBuffer; i++)             // РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃР°РЅРЅС‹С… Р±Р»РѕРєРѕРІ
     {
-        if (Deleting_memory == activeBuffer[i])            // Если в активном блоке записана выделенная память
+        if (Deleting_memory == activeBuffer[i])            // Р•СЃР»Рё РІ Р°РєС‚РёРІРЅРѕРј Р±Р»РѕРєРµ Р·Р°РїРёСЃР°РЅР° РІС‹РґРµР»РµРЅРЅР°СЏ РїР°РјСЏС‚СЊ
         {
-            tempBuffer = activeBuffer[i];                 // Запись памяти
+            tempBuffer = activeBuffer[i];                 // Р—Р°РїРёСЃСЊ РїР°РјСЏС‚Рё
             endBlock = i;
             break;
         }
@@ -222,30 +222,30 @@ int _free(void* Deleting_memory)                            // Освобождение памя
     if (!tempBuffer)
         return -1;
 
-    activeBuffer[endBlock] = 0;                          // Обнуление бафера
-    Active_blocks_amount--;                                 // Декремент числа записанных блоков
-    Block_buffer[Buffer_counter_of_blocks] = (char*)Deleting_memory;// Запоминание последней освобожденной памяти
+    activeBuffer[endBlock] = 0;                          // РћР±РЅСѓР»РµРЅРёРµ Р±Р°С„РµСЂР°
+    Active_blocks_amount--;                                 // Р”РµРєСЂРµРјРµРЅС‚ С‡РёСЃР»Р° Р·Р°РїРёСЃР°РЅРЅС‹С… Р±Р»РѕРєРѕРІ
+    Block_buffer[Buffer_counter_of_blocks] = (char*)Deleting_memory;// Р—Р°РїРѕРјРёРЅР°РЅРёРµ РїРѕСЃР»РµРґРЅРµР№ РѕСЃРІРѕР±РѕР¶РґРµРЅРЅРѕР№ РїР°РјСЏС‚Рё
     blockBufferSize[Buffer_counter_of_blocks] = Size_of_block[endBlock];
-    Buffer_counter_of_blocks++;                             // Инкрементирование числа блоков последней памяти 
-    Available_memory += Size_of_block[endBlock];          // Возвращение памяти с занимаемого блока 
+    Buffer_counter_of_blocks++;                             // РРЅРєСЂРµРјРµРЅС‚РёСЂРѕРІР°РЅРёРµ С‡РёСЃР»Р° Р±Р»РѕРєРѕРІ РїРѕСЃР»РµРґРЅРµР№ РїР°РјСЏС‚Рё 
+    Available_memory += Size_of_block[endBlock];          // Р’РѕР·РІСЂР°С‰РµРЅРёРµ РїР°РјСЏС‚Рё СЃ Р·Р°РЅРёРјР°РµРјРѕРіРѕ Р±Р»РѕРєР° 
 
     return 0;
 }
 
-void* _realloc(void* index, int size)                      // Перевыделение памяти 
+void* _realloc(void* index, int size)                      // РџРµСЂРµРІС‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё 
 {
     char* tempBuffer = 0;
     int i, endBlock;
 
-    for (i = 0; i < LastBlockBuffer; i++)                  // Количество записанных блоков
+    for (i = 0; i < LastBlockBuffer; i++)                  // РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃР°РЅРЅС‹С… Р±Р»РѕРєРѕРІ
     {
-        if (index == activeBuffer[i])                      // Если в активном блоке записана выделенная память
+        if (index == activeBuffer[i])                      // Р•СЃР»Рё РІ Р°РєС‚РёРІРЅРѕРј Р±Р»РѕРєРµ Р·Р°РїРёСЃР°РЅР° РІС‹РґРµР»РµРЅРЅР°СЏ РїР°РјСЏС‚СЊ
         {
-            if (activeBuffer[i] == NULL)                   // Если по индексу ничего не записано, то выделение памяти 
+            if (activeBuffer[i] == NULL)                   // Р•СЃР»Рё РїРѕ РёРЅРґРµРєСЃСѓ РЅРёС‡РµРіРѕ РЅРµ Р·Р°РїРёСЃР°РЅРѕ, С‚Рѕ РІС‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё 
                 return _malloc(size);
             else
             {
-                tempBuffer = activeBuffer[i];             // Запись текущего значения памяти в нужном блоке
+                tempBuffer = activeBuffer[i];             // Р—Р°РїРёСЃСЊ С‚РµРєСѓС‰РµРіРѕ Р·РЅР°С‡РµРЅРёСЏ РїР°РјСЏС‚Рё РІ РЅСѓР¶РЅРѕРј Р±Р»РѕРєРµ
                 endBlock = i;
                 break;
             }
